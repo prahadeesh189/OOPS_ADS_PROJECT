@@ -1,8 +1,7 @@
 #include<iostream>
 #include<string>
+
 using namespace std;
-
-
 
 class Contact {
 
@@ -32,9 +31,9 @@ class Contact {
         friend ostream & operator << (ostream & output, Contact & c);
         friend istream & operator >> (istream & input , Contact & c);
 
-
         string toString();
         long int getNumber();
+        string getName();
 };
 
 Contact toContact(string & line) {
@@ -92,32 +91,26 @@ Contact toContact(string & line) {
     }
     i++;
 
-
-
     stringstream string_TO_int_stream;
     int ind;
     string_TO_int_stream << index;
     string_TO_int_stream >> ind;
-
-
 
     stringstream string_TO_int_stream_number;
     long int numb;
     string_TO_int_stream_number << number;
     string_TO_int_stream_number >> numb;
 
-
-
-
     Contact ct(name, numb, address, email);
     return ct;
 }
 
-
-
-
 long int Contact::getNumber() {
     return Number;
+}
+
+string Contact::getName() {
+    return Name;
 }
 
 string Contact::toString() {
@@ -139,37 +132,8 @@ string Contact::toString() {
     result = result + EmailID;
     result = result + "|\n";
 
-
-
-
-
-
-
-    // long int f = 1234567089;
-    // long int h;
-
-
-    // string s; 
-
-    // stringstream int_TO_string_stream, string_TO_int_stream;  
-    // int_TO_string << f;   
-    // int_TO_string >> s;
-
-
-    // cout << s <<endl;
-
-    // string_TO_int << s;
-    // string_TO_int >> h;
-
-    // cout << h <<endl;
-
-
     return result;
 }
-
-
-
-
 
 ostream & operator << (ostream & output, Contact & c) {
 
@@ -184,14 +148,35 @@ ostream & operator << (ostream & output, Contact & c) {
 
 istream & operator >> (istream & input, Contact & c) {
 
-    cout << "Name:    \t";
-    input >> c.Name;
+    getchar();
+    while(1){
+        cout << "Name:    \t";
+        getline(input, c.Name, '\n');
 
-    cout << "Number:  \t";
-    input >> c.Number;
+        if(c.Name.at(0) >= 65 && c.Name.at(0) <= 90){
+            break;
+        }
+        else{
+            cout << "First letter of the name must be capital, No symbols/numbers allowed";
+            cout << endl;
+        }
+    }
+
+    while(1){
+        cout << "Number:  \t";
+        input >> c.Number;
+        //Valid phone numbers is of digits 7 to 15 acccording to international standards
+        if(c.Number >= 1000000 && c.Number <= 999999999999999){
+            break;
+        }
+        else{
+            cout << "Enter a valid phone number" << endl;
+        }
+    }
 
     cout << "Address: \t";
-    input >> c.Address;
+    getchar();
+    getline(input, c.Address, '\n');
 
     cout << "EmailID: \t";
     input >> c.EmailID;

@@ -2,6 +2,7 @@
 using namespace std;
 
 #include "./file.cpp"
+#include "./ContactClass.cpp"
 
 typedef struct Node {
     long int key;
@@ -18,13 +19,11 @@ class SplayTree {
     void display(Node * &root);
     void cloneInsert(Node * &root , long int key, int value);
     void delArrangeKey(Node * & root, int value);
-
     void preOrderWrite(Node * &root);
     void inOrderDisplay(Node * &root);
+    void preOrderDisplay(Node * &root);
 
     Node * root;   
-
-
 
     public:   
         SplayTree();
@@ -42,15 +41,11 @@ class SplayTree {
         void clone(long int key, int value);
 
         void preOrderWriteWrapper();
-
         void inOrderDisplayWrapper();
-
+        void preOrderDisplayWrapper();
 
         Node search(long int key);
 };
-
-
-
 
 Node SplayTree::search(long int key) {
     splay( root, key );
@@ -65,16 +60,8 @@ Node SplayTree::search(long int key) {
     return none;
 }
 
-
-
-
-
-
 void SplayTree::preOrderWrite(Node * &root) {
-
-    if (root != NULL) {
-
-            
+    if (root != NULL) {  
         ofstream fout_splayHistory;
         fout_splayHistory.open ( splayHistoryPath , std::ios::app);
         fout_splayHistory << root->key << "|" << root->value << endl;
@@ -86,15 +73,96 @@ void SplayTree::preOrderWrite(Node * &root) {
 }
 
 void SplayTree::preOrderWriteWrapper() {
-
     ofstream fout_splayHistory;
     fout_splayHistory.open ( splayHistoryPath , std::ios::trunc);
     fout_splayHistory << "";
     fout_splayHistory.close();
 
-
     preOrderWrite(root);
 }
+
+void SplayTree::inOrderDisplay(Node * &root) {
+    if (root != NULL) {
+        inOrderDisplay(root->left);
+        
+            
+        ifstream fin_Data;
+        fin_Data.open( dataDBPath , ios::app );
+
+        string line;
+        for(int i = 0;i < root->value; i++){
+            getline(fin_Data, line, '\n');
+        }
+        Contact contct = toContact(line);
+        cout << contct;
+        
+        fin_Data.close();
+
+        inOrderDisplay(root->right);
+    }
+}
+
+void SplayTree::inOrderDisplayWrapper() {
+    if (root == NULL) {
+        cout << "\n Tree is Empty \n";
+    }
+
+    inOrderDisplay(root);
+}
+
+
+void SplayTree::preOrderDisplay(Node * &root) {
+    if (root != NULL) {       
+            
+        ifstream fin_Data;
+        fin_Data.open( dataDBPath , ios::app );
+
+        string line;
+        for(int i = 0;i < root->value; i++){
+            getline(fin_Data, line, '\n');
+        }
+        Contact contct = toContact(line);
+        cout << contct;
+        
+        fin_Data.close();
+
+
+        preOrderDisplay(root->left);
+        preOrderDisplay(root->right);
+    }
+}
+
+void SplayTree::preOrderDisplayWrapper() {
+    if (root == NULL) {
+        cout << "\n Tree is Empty \n";
+    }
+
+    preOrderDisplay(root);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -105,7 +173,6 @@ SplayTree::SplayTree() {
     root = NULL;
 }
 
-
 void SplayTree::zig(Node * &node) {
     Node * nodeLeft = node->left;
     node->left = nodeLeft->right;
@@ -113,19 +180,12 @@ void SplayTree::zig(Node * &node) {
     node = nodeLeft;
 }
 
-
-
 void SplayTree::zag(Node * &node) {
     Node * nodeRight = node->right;
     node->right = nodeRight->left;
     nodeRight->left = node;
     node = nodeRight;
 }
-
-
-
-
-
 
 void SplayTree::cloneInsert(Node * & root, long int key, int value) {
 
@@ -145,22 +205,9 @@ void SplayTree::cloneInsert(Node * & root, long int key, int value) {
     }
 }
 
-
 void SplayTree::clone(long int key, int value) {
     cloneInsert(root, key, value);
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 void SplayTree::splay(Node * &root, long int key) {
 
@@ -227,14 +274,7 @@ void SplayTree::splay(Node * &root, long int key) {
             return;
         }
     }
-
-
-
 }
-
-
-
-
 
 void SplayTree::insert(long int key, int value) {
 
@@ -274,12 +314,6 @@ void SplayTree::insert(long int key, int value) {
     return;
 }
 
-
-
-
-
-
-
 void SplayTree::delArrangeKey(Node * & root, int value) {
     if (root != NULL) {
  
@@ -292,11 +326,6 @@ void SplayTree::delArrangeKey(Node * & root, int value) {
         delArrangeKey( root->right , value );
     }
 }
-
-
-
-
-
 
 int SplayTree::del(long int key) {
     if (root == NULL) {
@@ -333,46 +362,6 @@ int SplayTree::del(long int key) {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void SplayTree::display(Node * &root) {
 
     if (root != NULL) {
@@ -396,10 +385,6 @@ void SplayTree::display(Node * &root) {
     }
 }
 
-
-
-
-
 void SplayTree::displayWrapper() {
 
     if (root == NULL) {
@@ -408,9 +393,6 @@ void SplayTree::displayWrapper() {
 
     display(root);
 }
-
-
-
 
 void SplayTree::preOrder(Node * &root) {
     if (root != NULL) {
@@ -425,8 +407,6 @@ void SplayTree::preOrderWrapper() {
     cout << endl;
 }
 
-
-
 void SplayTree::postOrder(Node * &root) {
     if (root != NULL) {
         postOrder(root->left);
@@ -440,10 +420,6 @@ void SplayTree::postOrderWrapper() {
     cout << endl;
 }
 
-
-
-
-
 void SplayTree::inOrder(Node * &root) {
     if (root != NULL) {
         inOrder(root->left);
@@ -456,57 +432,4 @@ void SplayTree::inOrderWrapper() {
     inOrder(root);
     cout << endl;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

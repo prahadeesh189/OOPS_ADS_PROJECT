@@ -1,7 +1,10 @@
-1|EREN|1234567001|SHIGAN SINA|AOT@MAIL.COM|
-2|REINER|1234567002|MARL EY|AOT@MAIL.COM|
-3|PORCO|1234567003|MARL EY|AOT@MAIL.COM|
-4|PIECK|1234567004|MARL EY|AOT@MAIL.COM|
-5|UDO|1234567007|MARL EY|AOT@MAIL.COM|
-6|COLT|1234567008|MARL EY|AOT@MAIL.COM|
-7|GABI|1234567006|MARL EY|AOT@MAIL.COM|
+1|Mahendra Singh Dhoni|9944789432|12, Cricket Road, Ranchi.|dhonimsd@coolmail.com|
+2|Gilfoyle|9875670989|23, K K Avenue, Silicon Valley|gilfoylenetwork@gmail.com|
+3|Anbuchelvan|98678456934|24/35, Haldiram's Road, Kolkata|anbuips@gmail.com|
+4|Mary|9790345988|67/68, Christopher Road, Chennai.|marywilliam@outlook.com|
+5|Quinton De Kock|9293897844|West Road, South Africa|qdeko@gmail.com|
+6|Abraham|9864634598|Garden's Cafe, Park Town|abra@gmail.com|
+7|Alex|9756755988|Trunk Coal Field, Rambo|alexmark@gmail.com|
+8|Arvind Swamy|9790344568|Palo street, Ponneri|arvswa@outlook.com|
+9|Menaka|9246897844|Malini Street, Mamallapuram|menaka@yahoo.com|
+10|Ashok|9345345988|Avadi, Chennai|ashokkumar@yahoo.com|
